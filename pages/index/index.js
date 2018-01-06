@@ -17,15 +17,32 @@ Page({
       url: '../logs/logs'
     })
   },
+  goUserRankTap: function() {
+    wx.showToast({
+      title: '暂时未开放',
+      icon: 'success',
+      duration: 1000
+    })
+  },
   goQaAddTap: function() {
-    wx.navigateTo({
-      url: '../qas/qas'
+    wx.showToast({
+      title: '暂时未开放',
+      icon: 'success',
+      duration: 1000
     })
   },
   goQaListTap: function() {
-    wx.navigateTo({
-      url: '../qas/qas'
-    })
+    if (app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '../qas/qas'
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'success',
+        duration: 1000
+      })
+    }
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

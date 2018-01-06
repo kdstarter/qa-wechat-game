@@ -16,6 +16,6 @@
   color: #aaa;
 }
 
-.usermotto {
-  margin-top: 200px;
+.userinfo-actions {
+  margin-top: 150px;
 }

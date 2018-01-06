@@ -30,9 +30,9 @@ Page({
     return {
       "id": id,
       "owner_id": "Teddy",
-      "question": "我最喜欢的宠物？",
+      "content": "我最喜欢的宠物？",
       "status": "opening",
-      "type": "public",
+      "show_type": "signed",
       "ticket_pwd": "",
       "ticket_price": 1,
       "award_price": 3,
@@ -62,13 +62,13 @@ Page({
           "guess_id": "001",
           "user_id": "Kitty",
           "content": "猫",
-          "award_price": "-1"
+          "score": "-1"
         },
         {
           "guess_id": "002",
           "user_id": "Teddy",
           "content": "泰迪",
-          "award_price": "2"
+          "score": "2"
         }
       ]
     };
