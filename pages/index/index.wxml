@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
     <block wx:else>
       <image bindtap="myAvatarTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
@@ -9,7 +9,8 @@
   </view>
 
   <view class="usermotto">
-    <text bindtap="goQaAddTap" class="go-qa-add-btn">{{go_qa_add}}</text>
-    <text bindtap="goQaListTap" class="user-motto">{{motto}}</text>
+    <text bindtap="goQaAddTap" class="go-qa-add-btn">{{goQaAdd}}</text>
+    <text bindtap="goQaListTap" class="user-motto">{{goQaGuess}}</text>
+    <text bindtap="goQaListTap" class="user-ranking">{{goUserRanking}}</text>
   </view>
 </view>

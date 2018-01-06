@@ -1,6 +1,6 @@
 <!--qas.wxml-->
 <view class="container qa-list">
   <block wx:for="{{qas}}" wx:for-item="qa">
-    <text class="qa-item">{{index + 1}}.{{qa.owner_id}} {{qa.question}} 输{{qa.ticket_price}}元/赢{{qa.award_price}}元</text>
+    <text bindtap="goQaViewTap" class="qa-item">{{index + 1}}.{{qa.status}}.{{qa.owner_id}}问 {{qa.question}} {{qa.guesses.length}}人已猜猜</text>
   </block>
 </view>

@@ -2,12 +2,13 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/qas/qas"
+    "pages/qas/qas",
+    "pages/qas/show"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "猜一猜红包",
+    "navigationBarTitleText": "猜秘密",
     "navigationBarTextStyle":"black"
   }
 }
