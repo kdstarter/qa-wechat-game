@@ -4,15 +4,26 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    go_qa_add: '我要发红包',
+    motto: ' 开始拿红包',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
+  myAvatarTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
+    })
+  },
+  goQaAddTap: function() {
+    wx.navigateTo({
+      url: '../qas/qas'
+    })
+  },
+  goQaListTap: function() {
+    wx.navigateTo({
+      url: '../qas/qas'
     })
   },
   onLoad: function () {
