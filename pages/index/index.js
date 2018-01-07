@@ -73,7 +73,7 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
+    console.log(e.detail.userInfo, e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

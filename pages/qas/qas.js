@@ -10,8 +10,8 @@ Page({
     if (qa_list.length === 0) {
       var demo_qa1 = this.demoQaData("001");
       qa_list.push(demo_qa1);
-      var demo_qa2 = this.demoQaData("002");
-      qa_list.push(demo_qa2);
+      // var demo_qa2 = this.demoQaData("002");
+      // qa_list.push(demo_qa2);
       wx.setStorageSync('qa_list', qa_list);
     }
 
