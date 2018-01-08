@@ -58,6 +58,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        console.log("globalData1: ", app.globalData)
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -73,8 +74,9 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e.detail.userInfo, e)
     app.globalData.userInfo = e.detail.userInfo
+    console.log("wxUserInfo", e.detail.userInfo, e)
+    console.log("globalData: ", app.globalData)
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
