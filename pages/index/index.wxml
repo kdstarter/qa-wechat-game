@@ -9,8 +9,8 @@
   </view>
 
   <view class="userinfo-actions">
-    <text bindtap="goQaAddTap" class="go-qa-add-btn">{{goQaAdd}}</text>
-    <text bindtap="goQaListTap" class="user-motto">{{goQaGuess}}</text>
-    <text bindtap="goUserRankTap" class="user-ranking">{{goUserRanking}}</text>
+    <text bindtap="goQaAddTap" class="go-qa-add-btn">说个秘密</text>
+    <text bindtap="goQaListTap" class="user-motto"> 去猜秘密</text>
+    <text bindtap="goUserRankTap" class="user-ranking"> 得分排行</text>
   </view>
 </view>

@@ -30,7 +30,7 @@ App({
                     wx.request({
                       method: 'POST',
                       url: this.globalData.serverHost + 'api/sessions',
-                      headers: { 'accept': 'application/vnd.api+json;version=1' },
+                      header: { 'Accept': 'application/vnd.api+json;version=1' },
                       data: { data: { js_code: js_code, user_info: this.globalData.userInfo } },
                       success: res => {
                         console.log("signInfo1: ", res.data.data)
@@ -62,7 +62,7 @@ App({
         wx.request({
           method: 'POST',
           url: this.globalData.serverHost + 'api/sessions',
-          headers: { 'accept': 'application/vnd.api+json;version=1' },
+          header: { 'Accept': 'application/vnd.api+json;version=1' },
           data: { data: { js_code: resCode } },
           success: res => {
             console.log("signInfo: ", res.data.data)

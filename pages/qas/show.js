@@ -2,13 +2,14 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    qa: []
+    qa: null
   },
   onLoad: function () {
-    var qa_list = wx.getStorageSync('qa_list') || [];
+    var qaList = wx.getStorageSync('qaList') || [];
+    console.log("qa show: ", qaList[0])
 
     this.setData({
-      qa: qa_list[0]
+      qa: qaList[0]
     })
   },
   backToQaList: function() {
@@ -35,7 +36,7 @@ Page({
     var that = this;
     for (var i = 0; i < answers.length - 1; i++) {
       var answer = answers[i];
-      if (answer.match_pattern == "equal" && guess === answer.content) {
+      if (answer.match_pattern == "match_equal" && guess === answer.content) {
         console.log(util.formatTime(new Date()) + " 你真厉害，完全猜对");
         is_over = true;
         wx.showModal({
@@ -45,7 +46,7 @@ Page({
           showCancel: false
         });
         break
-      } else if (answer.match_pattern == "include" && guess.indexOf(answer.content) >= 0) {
+      } else if (answer.match_pattern == "match_include" && guess.indexOf(answer.content) >= 0) {
         console.log(util.formatTime(new Date()) + " 你真厉害，猜对了关键词");
         is_over = true;
         wx.showModal({

@@ -1,4 +1,5 @@
 //qas.js
+const app = getApp()
 const util = require('../../utils/util.js')
 
 Page({
@@ -6,20 +7,33 @@ Page({
     qas: []
   },
   onLoad: function () {
-    var qa_list = wx.getStorageSync('qa_list') || [];
-    if (qa_list.length === 0) {
-      var demo_qa1 = this.demoQaData("001");
-      qa_list.push(demo_qa1);
-      // var demo_qa2 = this.demoQaData("002");
-      // qa_list.push(demo_qa2);
-      wx.setStorageSync('qa_list', qa_list);
-    }
-
-    this.setData({
-      qas: (qa_list).map(qa => {
-        return qa
-      })
-    })
+    var that = this
+    var authToken = app.globalData.authInfo.auth_token
+    console.log("authorization: ", authToken)
+    wx.request({
+      method: 'GET',
+      url: app.globalData.serverHost + 'api/questions',
+      header: { 'Authorization': authToken, 'Accept': 'application/vnd.api+json;version=1' },
+      success: res => {
+        // 需要做异常处理
+        if (res.data.errors) {
+          console.error('getQas: ', res.data.errors)
+          wx.showToast({
+            title: '获取数据失败',
+            icon: 'success',
+            duration: 2000
+          })
+        } else {
+          console.log("questions: ", res.data.data)
+          that.setData({
+            qas: (res.data.data).map(qa => {
+              return qa
+            })
+          })
+          wx.setStorageSync('qaList', res.data.data)
+        };
+      }
+    });
   },
   goQaViewTap: function() {
     wx.navigateTo({
@@ -41,19 +55,19 @@ Page({
         {
           "answer_id": "001",
           "content": "泰迪狗",
-          "match_pattern": "equal",
+          "match_pattern": "match_equal",
           "award_price": 3
         },
         {
           "answer_id": "002",
           "content": "泰迪",
-          "match_pattern": "include",
+          "match_pattern": "match_include",
           "award_price": 2
         },
         {
           "answer_id": "003",
           "content": "狗",
-          "match_pattern": "include",
+          "match_pattern": "match_include",
           "award_price": 1
         }
       ],

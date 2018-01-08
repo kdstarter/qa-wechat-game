@@ -2,7 +2,7 @@
 <view class="container">
   <form bindsubmit="showGuessResult">
     <view class="qainfo">
-      <text class="qa-content">{{qa.owner_id}}问 {{qa.question}}</text>
+      <text class="qa-content">{{qa.owner.name}}问 {{qa.content}}</text>
     </view>
     <view class="qainfo">
       <text class="qa-content">猜对最多可赢得{{qa.award_price}}分</text>

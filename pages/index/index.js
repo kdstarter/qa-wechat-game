@@ -4,9 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    goQaAdd: '说个秘密',
-    goQaGuess: ' 去猜秘密',
-    goUserRanking: ' 得分排行',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
