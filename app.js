@@ -31,7 +31,7 @@ App({
                       method: 'POST',
                       url: this.globalData.serverHost + 'api/sessions',
                       header: { 'Accept': 'application/vnd.api+json;version=1' },
-                      data: { data: { js_code: js_code, user_info: this.globalData.userInfo } },
+                      data: { data: { js_code: js_code, user_info: this.globalData.userInfo, sys_info: wx.getSystemInfoSync() } },
                       success: res => {
                         console.log("signInfo1: ", res.data.data)
                         // wx.setStorageSync('auth_info', res.data.data)
@@ -59,6 +59,7 @@ App({
           }
         });
 
+        console.log("sysInfo: ", wx.getSystemInfoSync())
         wx.request({
           method: 'POST',
           url: this.globalData.serverHost + 'api/sessions',

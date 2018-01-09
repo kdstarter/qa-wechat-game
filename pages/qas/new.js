@@ -28,8 +28,23 @@ Page({
   submitNewQa: function(event) {
     var formData = event.detail.value;
     console.log('newQa: ', formData)
+    if (formData.content.trim() === "") {
+      wx.showToast({
+        title: '请输入题目内容',
+        icon: 'success',
+        duration: 2000
+      })
+      return
+    } else if (formData.answer_content.trim() === "") {
+      wx.showToast({
+        title: '请输入答案内容',
+        icon: 'success',
+        duration: 2000
+      })
+      return
+    }
+
     var authToken = app.globalData.authInfo.auth_token
-    
     wx.request({
       method: 'POST',
       url: app.globalData.serverHost + 'api/questions',

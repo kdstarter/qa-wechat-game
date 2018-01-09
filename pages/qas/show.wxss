@@ -1,3 +1,9 @@
+.container-flex {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+
 .guess_conent {
   margin-top: 20px;
   margin-bottom: 20px;

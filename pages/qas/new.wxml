@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container container-flex">
   <form bindsubmit="submitNewQa">
     <view class="section section_gap">
       <view class="section__title">选择是否公开</view>
@@ -9,7 +9,7 @@
       </radio-group>
 
       <view class="section">
-        猜错时给你的积分数<input name="ticket_price" value="1" type="number" placeholder="入场券(积分数)" />
+        猜错时你赢得积分数<input name="ticket_price" value="1" type="number" placeholder="入场券(积分数)" />
       </view>
       <view class="section">
         题目内容<input name="content" type="text" placeholder="要猜的题目内容" />
@@ -25,13 +25,16 @@
       </radio-group>
 
       <view class="section">
+        猜对时你输的积分数<input name="answer_award_price" value="3" type="number" placeholder="奖励券(积分数)" />
+      </view>
+      <view class="section">
         答案内容<input name="answer_content" type="text" placeholder="要猜的答案内容" />
       </view>
       <view class="section">
-        猜对时你输的积分数<input name="answer_award_price" value="3" type="number" placeholder="奖励券(积分数)" />
+        有人猜对或超过三天将公布
       </view>
     </view>
 
-    <view><button type="primary" form-type="submit">现在发布！</button></view>
+    <view><button type="primary" form-type="submit">现在发布</button></view>
   </form>
 </view>

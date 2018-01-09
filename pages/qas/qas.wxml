@@ -1,6 +1,6 @@
 <!--qas.wxml-->
-<view class="container qa-list">
+<view class="container container-flex">
   <block wx:for="{{qas}}" wx:key="qa{{qa.id}}" wx:for-item="qa">
-    <text bindtap="goQaViewTap" class="qa-item">{{index + 1}}.{{qa.status ==="opening" ? "竞猜中" : "已关闭"}} {{qa.owner.name}}问 {{qa.content}} {{qa.guesses.length}}人已猜猜</text>
+    <text data-qa-id="{{qa.id}}" bindtap="goQaViewTap" class="qa-item">{{index + 1}}.{{statuses[qa.status]}} {{qa.show_type === 'unsigned' ? '匿名' : qa.owner.name}}问 {{qa.content}} {{qa.guesses.length}}人已猜</text>
   </block>
 </view>

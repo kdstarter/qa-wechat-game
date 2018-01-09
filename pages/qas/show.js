@@ -4,13 +4,19 @@ Page({
   data: {
     qa: null
   },
-  onLoad: function () {
+  onLoad: function (event) {
     var qaList = wx.getStorageSync('qaList') || [];
-    console.log("qa show: ", qaList[0])
-
-    this.setData({
-      qa: qaList[0]
-    })
+    for (var i = 0; i < qaList.length; i++) {
+      var qa = qaList[i];
+      if (qa.id == ~~event.id) {
+        this.setData({
+          qa: qa
+        })
+        console.log("showQa: ", qa)
+        break
+      }
+    }
+    
   },
   backToQaList: function() {
     wx.navigateBack({
@@ -30,11 +36,11 @@ Page({
     }
 
     var answers = this.data.qa.answers;
-    console.log("你猜测是: " + guess);
+    console.log("你猜测是: " + guess, answers);
 
     var is_over = false;
     var that = this;
-    for (var i = 0; i < answers.length - 1; i++) {
+    for (var i = 0; i < answers.length; i++) {
       var answer = answers[i];
       if (answer.match_pattern == "match_equal" && guess === answer.content) {
         console.log(util.formatTime(new Date()) + " 你真厉害，完全猜对");

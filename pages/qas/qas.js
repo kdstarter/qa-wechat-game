@@ -4,12 +4,18 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
+    statuses: {
+      created: '已创建',
+      opening: '竞猜中',
+      exposed: '已公布',
+      closed: '已关闭'
+    },
     qas: []
   },
   onLoad: function () {
     var that = this
     var authToken = app.globalData.authInfo.auth_token
-    console.log("authorization: ", authToken)
+
     wx.request({
       method: 'GET',
       url: app.globalData.serverHost + 'api/questions',
@@ -35,9 +41,9 @@ Page({
       }
     });
   },
-  goQaViewTap: function() {
+  goQaViewTap: function(event) {
     wx.navigateTo({
-      url: '../qas/show'
+      url: '../qas/show?id=' + event.currentTarget.dataset.qaId
     })
   },
   demoQaData: function (id) {

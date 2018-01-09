@@ -1,8 +1,8 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container container-flex">
   <form bindsubmit="showGuessResult">
     <view class="qainfo">
-      <text class="qa-content">{{qa.owner.name}}问 {{qa.content}}</text>
+      <text class="qa-content">{{qa.show_type === 'unsigned' ? '匿名' : qa.owner.name}}问 {{qa.content}}</text>
     </view>
     <view class="qainfo">
       <text class="qa-content">猜对最多可赢得{{qa.award_price}}分</text>
