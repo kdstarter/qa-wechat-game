@@ -22,11 +22,17 @@ Page({
     })
   },
   goQaAddTap: function() {
-    wx.showToast({
-      title: '暂时未开放',
-      icon: 'success',
-      duration: 1000
-    })
+    if (app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '../qas/new'
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'success',
+        duration: 1000
+      })
+    }
   },
   goQaListTap: function() {
     if (app.globalData.userInfo) {

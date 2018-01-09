@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/qas/qas",
+    "pages/qas/new",
     "pages/qas/show"
   ],
   "window":{
