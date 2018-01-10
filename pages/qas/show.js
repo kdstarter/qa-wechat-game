@@ -1,3 +1,4 @@
+const app = getApp()
 const util = require('../../utils/util.js')
 
 Page({
@@ -37,43 +38,53 @@ Page({
 
     var answers = this.data.qa.answers;
     console.log("你猜测是: " + guess, answers);
+    var authToken = app.globalData.authInfo.auth_token
 
-    var is_over = false;
-    var that = this;
-    for (var i = 0; i < answers.length; i++) {
-      var answer = answers[i];
-      if (answer.match_pattern == "match_equal" && guess === answer.content) {
-        console.log(util.formatTime(new Date()) + " 你真厉害，完全猜对");
-        is_over = true;
-        wx.showModal({
-          title: "提示",
-          content: "真厉害，完全猜对!",
-          success: that.backToQaList,
-          showCancel: false
-        });
-        break
-      } else if (answer.match_pattern == "match_include" && guess.indexOf(answer.content) >= 0) {
-        console.log(util.formatTime(new Date()) + " 你真厉害，猜对了关键词");
-        is_over = true;
-        wx.showModal({
-          title: "提示",
-          content: "不错哦，猜对了关键词!",
-          success: that.backToQaList,
-          showCancel: false
-        });
-        break
+    wx.request({
+      method: 'POST',
+      url: app.globalData.serverHost + 'api/questions/' + this.data.qa.id + '/guess_answer',
+      header: { 'Authorization': authToken, 'Accept': 'application/vnd.api+json;version=1' },
+      data: { data: {
+        guess: {
+          content: guess
+        }
+      } },
+      success: res => {
+        var data = res.data.data;
+        console.log("guessQa: ", res.data)
+        if (res.data.errors) {
+          wx.showToast({
+            title: res.data.errors[0].detail,
+            icon: 'success',
+            duration: 2000
+          })
+        } else {
+          if (util.isEmpty(data.hited_answer)) {
+            console.warn(util.formatTime(new Date()) + " 非常遗憾，你猜错了");
+            wx.showModal({
+              title: "提示",
+              content: "喔 很遗憾猜错了~~",
+              showCancel: false
+            });
+          } else if (data.hited_answer.match_pattern === 'match_equal') {
+            console.log(util.formatTime(new Date()) + " 你真厉害，完全猜对");
+            wx.showModal({
+              title: "提示",
+              content: "真厉害，完全猜对!",
+              success: this.backToQaList,
+              showCancel: false
+            });
+          } else if (data.hited_answer.match_pattern === 'match_include') {
+            console.log(util.formatTime(new Date()) + " 你真厉害，猜对了关键词");
+            wx.showModal({
+              title: "提示",
+              content: "不错哦，猜对了关键词!",
+              success: this.backToQaList,
+              showCancel: false
+            });
+          };
+        }
       }
-    }
-
-    if (is_over) { 
-      // this.backToQaList();
-    } else {
-      console.warn(util.formatTime(new Date()) + " 非常遗憾，你猜错了");
-      wx.showModal({
-        title: "提示",
-        content: "喔 很遗憾猜错了~~",
-        showCancel: false
-      });
-    }
+    });
   }
 })
