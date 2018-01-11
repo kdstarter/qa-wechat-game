@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Page({
   data: {
@@ -78,11 +79,24 @@ Page({
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
-    console.log("wxUserInfo", e.detail.userInfo, e)
-    console.log("globalData: ", app.globalData)
+    console.log("wxUserInfo1", e.detail.userInfo, e)
+    console.log("globalData1: ", app.globalData)
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    wx.request({
+      method: 'POST',
+      url: app.globalData.serverHost + 'api/sessions',
+      header: { 'Accept': 'application/vnd.api+json;version=1' },
+      data: { data: { js_code: app.globalData.authInfo.auth_token, user_info: e.detail.userInfo } },
+      success: res => {
+        console.log("signInfo1: ", res.data.data)
+        // wx.setStorageSync('auth_info', res.data.data)
+        if (!util.isEmpty(res.data.data)) {
+          app.globalData.authInfo = res.data.data
+        };
+      }
+    });
   }
 })
