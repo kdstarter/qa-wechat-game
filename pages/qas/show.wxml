@@ -9,8 +9,20 @@
     </view>
 
     <view class="qainfo">
-      <input type="text" class="guess_conent" name="guess_conent" placeholder="你猜测是" auto-focus/>
+      <input type="text" class="guess_conent" name="guess_conent" placeholder="你猜测是"/>
       <view><button data-qa-id="{{qa.id}}" type="primary" form-type="submit">花 {{qa.ticket_price}} 分猜一猜</button></view>
     </view>
   </form>
+
+  <view wx:if="{{qa.status === 'exposed'}}" class="container-answer">
+    <button bindtap="viewAnswerTap">查看答案</button>
+    <text wx:if="{{haveJoined}}">{{qa.answers[0].content}}</text>
+  </view>
+
+  <view wx:if="{{qa.status === 'exposed'}}" class="container-answer">
+    <button>猜测记录</button>
+    <block wx:for="{{qa.guesses}}" wx:key="guess{{guess.id}}" wx:for-item="guess">
+      <text class="guess-item">{{guess.user.name}}猜测是: {{guess.content}}</text>
+    </block>
+  </view>
 </view>

@@ -3,7 +3,8 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    qa: null
+    qa: null,
+    haveJoined: false
   },
   onLoad: function (event) {
     var qaList = wx.getStorageSync('qaList') || [];
@@ -23,6 +24,36 @@ Page({
     wx.navigateBack({
       url: '/pages/qas/qas'
     })
+  },
+  qaFinshed: function() {
+    return this.data.qa.status === 'exposed'
+  },
+  viewAnswerTap: function(event) {
+    var guesses = this.data.qa.guesses;
+    var current_user_id = app.globalData.authInfo.user.id;
+
+    if (current_user_id === this.data.qa.owner.id) {
+      this.setData({haveJoined: true})
+      console.log('出题者可查看', current_user_id)
+    } else if (this.qaFinshed()) {
+      for (var i = 0; i < guesses.length; i++) {
+        var guess = guesses[i];
+        if (current_user_id === guess.user.id) {
+          this.setData({haveJoined: true})
+          console.log('有猜测过可查看', current_user_id, guess)
+          break;
+        }
+      }
+    } 
+
+    if (!this.data.haveJoined) {
+      console.log('未猜测过', current_user_id, guesses)
+      wx.showModal({
+        title: "提示",
+        content: "只有猜测过才可查看喔！",
+        showCancel: false
+      });
+    }
   },
   showGuessResult: function(event) {
     var form_data = event.detail.value;

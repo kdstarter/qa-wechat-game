@@ -8,3 +8,13 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.container-answer{
+  padding-top: 30px;
+}
+
+.guess-item{
+  margin-left: 40rpx;
+  margin-top: 10rpx;
+  display: inline-block;
+}
