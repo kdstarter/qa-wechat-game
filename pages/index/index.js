@@ -51,6 +51,7 @@ Page({
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
+        authInfo: app.globalData.authInfo,
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
@@ -59,6 +60,7 @@ Page({
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
+          authInfo: app.globalData.authInfo,
           userInfo: res.userInfo,
           hasUserInfo: true
         })
@@ -82,6 +84,7 @@ Page({
     console.log("wxUserInfo1", e.detail.userInfo, e)
     console.log("globalData1: ", app.globalData)
     this.setData({
+      authInfo: app.globalData.authInfo,
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
